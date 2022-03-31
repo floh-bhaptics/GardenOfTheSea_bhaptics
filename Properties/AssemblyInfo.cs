@@ -24,7 +24,7 @@ using MelonLoader;
 [assembly: Guid("afb9b630-671d-4f73-ab6a-d16ddcb1d837")]
 
 
-[assembly: MelonInfo(typeof(GardenOfTheSea_bhaptics.GardenOfTheSea_bhaptics), "GardenOfTheSea_bhaptics", "1.0.0", "Florian Fahrenberger")]
+[assembly: MelonInfo(typeof(GardenOfTheSea_bhaptics.GardenOfTheSea_bhaptics), "GardenOfTheSea_bhaptics", "1.1.0", "Florian Fahrenberger")]
 [assembly: MelonGame("Neat Corporation", "Garden of the Sea")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
@@ -37,5 +37,5 @@ using MelonLoader;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // indem Sie "*" wie unten gezeigt eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0")]
+[assembly: AssemblyFileVersion("1.1.0")]

@@ -19,6 +19,8 @@ namespace MyBhapticsTactsuit
         public bool systemInitialized = false;
         // Event to start and stop the heartbeat thread
         private static ManualResetEvent HeartBeat_mrse = new ManualResetEvent(false);
+        private static ManualResetEvent Alarm_mrse = new ManualResetEvent(false);
+        private static ManualResetEvent Blender_mrse = new ManualResetEvent(false);
         // dictionary of all feedback patterns found in the bHaptics directory
         public Dictionary<String, FileInfo> FeedbackMap = new Dictionary<String, FileInfo>();
 
@@ -35,6 +37,28 @@ namespace MyBhapticsTactsuit
             }
         }
 
+        public void AlarmFunc()
+        {
+            while (true)
+            {
+                // Check if reset event is active
+                Alarm_mrse.WaitOne();
+                bHaptics.SubmitRegistered("Alarm");
+                Thread.Sleep(1050);
+            }
+        }
+
+        public void BlenderFunc()
+        {
+            while (true)
+            {
+                // Check if reset event is active
+                Blender_mrse.WaitOne();
+                bHaptics.SubmitRegistered("Blender");
+                Thread.Sleep(1050);
+            }
+        }
+
         public TactsuitVR()
         {
             LOG("Initializing suit");
@@ -46,6 +70,10 @@ namespace MyBhapticsTactsuit
             LOG("Starting HeartBeat thread...");
             Thread HeartBeatThread = new Thread(HeartBeatFunc);
             HeartBeatThread.Start();
+            Thread AlarmThread = new Thread(AlarmFunc);
+            AlarmThread.Start();
+            Thread BlenderThread = new Thread(BlenderFunc);
+            BlenderThread.Start();
         }
 
         public void LOG(string logStr)
@@ -111,7 +139,7 @@ namespace MyBhapticsTactsuit
             bHaptics.SubmitRegistered(key, key, scaleOption, rotationOption);
         }
 
-        public void Movement(bool isRightHand, float intensity = 1.0f)
+        public void Handle(string handleObject, bool isRightHand, float intensity = 1.0f)
         {
             // weaponName is a parameter that will go into the vest feedback pattern name
             // isRightHand is just which side the feedback is on
@@ -127,12 +155,12 @@ namespace MyBhapticsTactsuit
             if (isRightHand) { postfix = "_R";}
 
             // stitch together pattern names for Arm and Hand recoil
-            string keyHand = "MovementHands" + postfix;
-            string keyArm = "MovementArms" + postfix;
+            string keyHand = handleObject + "Hands" + postfix;
+            string keyArm = handleObject + "Arms" + postfix;
+            string keyVest = handleObject + "Vest" + postfix;
             // vest pattern name contains the weapon name. This way, you can quickly switch
             // between swords, pistols, shotguns, ... by just changing the shoulder feedback
             // and scaling via the intensity for arms and hands
-            string keyVest = "MovementVest" + postfix;
             if ((bHaptics.IsPlaying(keyArm)) | (bHaptics.IsPlaying(keyHand)) | (bHaptics.IsPlaying(keyVest))) return;
             bHaptics.SubmitRegistered(keyHand, keyHand, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyArm, keyArm, scaleOption, rotationFront);
@@ -164,6 +192,29 @@ namespace MyBhapticsTactsuit
             HeartBeat_mrse.Reset();
         }
 
+        public void StartAlarm()
+        {
+            Alarm_mrse.Set();
+        }
+
+        public void StopAlarm()
+        {
+            Alarm_mrse.Reset();
+            StopHapticFeedback("Alarm");
+        }
+
+        public void StartBlender()
+        {
+            Blender_mrse.Set();
+        }
+
+        public void StopBlender()
+        {
+            Blender_mrse.Reset();
+            StopHapticFeedback("Blender");
+        }
+
+
         public bool IsPlaying(String effect)
         {
             return bHaptics.IsPlaying(effect);
@@ -188,6 +239,8 @@ namespace MyBhapticsTactsuit
             // Yes, looks silly here, but if you have several threads like this, this is
             // very useful when the player dies or starts a new level
             StopHeartBeat();
+            StopAlarm();
+            StopBlender();
         }
 
 
