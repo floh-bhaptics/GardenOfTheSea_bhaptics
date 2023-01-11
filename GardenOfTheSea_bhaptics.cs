@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using MelonLoader;
 using HarmonyLib;
 using MyBhapticsTactsuit;
+using Il2Cpp;
+
+[assembly: MelonInfo(typeof(GardenOfTheSea_bhaptics.GardenOfTheSea_bhaptics), "GardenOfTheSea_bhaptics", "1.1.0", "Florian Fahrenberger")]
+[assembly: MelonGame("Neat Corporation", "Garden of the Sea")]
 
 namespace GardenOfTheSea_bhaptics
 {
@@ -14,9 +18,8 @@ namespace GardenOfTheSea_bhaptics
     {
         public static TactsuitVR tactsuitVr;
 
-        public override void OnApplicationStart()
+        public override void OnInitializeMelon()
         {
-            base.OnApplicationStart();
             tactsuitVr = new TactsuitVR();
             tactsuitVr.PlaybackHaptics("HeartBeat");
         }
