@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <OutputPath>F:\SteamLibrary\steamapps\common\Vox Machinae\Mods</OutputPath>
+    <OutputPath>D:\Games\Steam\steamapps\common\Garden of the Sea\Mods</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,11 +19,15 @@
 
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>F:\SteamLibrary\steamapps\common\Vox Machinae\MelonLoader\net6\0Harmony.dll</HintPath>
+      <HintPath>D:\Games\Steam\steamapps\common\Garden of the Sea\MelonLoader\net6\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>D:\Games\Steam\steamapps\common\Garden of the Sea\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="bHapticsLib">
+      <HintPath>D:\Games\Steam\steamapps\common\Garden of the Sea\MelonLoader\net6\bHapticsLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppInterop.Runtime">

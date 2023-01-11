@@ -16,7 +16,7 @@ namespace GardenOfTheSea_bhaptics
 {
     public class GardenOfTheSea_bhaptics : MelonMod
     {
-        public static TactsuitVR tactsuitVr;
+        public static TactsuitVR tactsuitVr = null!;
 
         public override void OnInitializeMelon()
         {
