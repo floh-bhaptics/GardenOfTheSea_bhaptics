@@ -9,7 +9,7 @@ using HarmonyLib;
 using MyBhapticsTactsuit;
 using Il2Cpp;
 
-[assembly: MelonInfo(typeof(GardenOfTheSea_bhaptics.GardenOfTheSea_bhaptics), "GardenOfTheSea_bhaptics", "1.1.0", "Florian Fahrenberger")]
+[assembly: MelonInfo(typeof(GardenOfTheSea_bhaptics.GardenOfTheSea_bhaptics), "GardenOfTheSea_bhaptics", "2.0.0", "Florian Fahrenberger")]
 [assembly: MelonGame("Neat Corporation", "Garden of the Sea")]
 
 namespace GardenOfTheSea_bhaptics
